@@ -26,8 +26,8 @@ uv run ansible-playbook -i inventory.ini playbook.yaml
 
 this will now fail in the last step, if run with mitogen; or it will succeed, if without mitogen.
 
-7. if you want to try again (to try disable mitogen, experiment, etc), you need to first remove the docker (`docker ps` and `docker kill <ID>`), then run new one
+7. if you want to try again (to try disable mitogen, experiment, etc), you need to first remove the docker (`podman ps` and `podman kill <ID>`), then run new one
 
 ```
-docker run -d -p 2222:22 my_ssh_image
+podman run -d -p 2222:22 my_ssh_image
 ```
