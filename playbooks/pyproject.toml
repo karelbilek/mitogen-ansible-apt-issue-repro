@@ -1,0 +1,10 @@
+[project]
+name = "playbooks"
+version = "0.1.0"
+description = "repro for ansible apt issue"
+requires-python = ">=3.14"
+dependencies = [
+    "ansible-core==2.20",
+    "ansible-runner==2.4",
+    "mitogen>=0.3.22",
+]

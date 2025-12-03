@@ -1,0 +1,43 @@
+- name: My first play
+  hosts: servers
+  tasks:
+    - name: load trixie /etc/apt/sources.list.d/debian.sources
+      copy:
+        dest: "/etc/apt/sources.list.d/debian.sources"
+        content: |
+          Types: deb
+          URIs: https://deb.debian.org/debian
+          Suites: trixie trixie-updates
+          Components: main non-free-firmware
+          Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg
+
+          Types: deb
+          URIs: https://security.debian.org/debian-security
+          Suites: trixie-security
+          Components: main non-free-firmware
+          Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg
+
+    - name: full-upgrade
+      apt:
+        update_cache: yes
+        upgrade: full
+
+    # adding `ansible.builtin.meta: reset_connection` anywhere from here
+    # to "update apt cache"
+    # fixes the issue
+
+    - name: download gpg key
+      ansible.builtin.get_url:
+        url: "https://repo.powerdns.com/FD380FBB-pub.asc"
+        # it is important for the repro so the file ends with .gpg!
+        dest: "/etc/apt/keyrings/auth-50-pub.gpg"
+
+    - name: pdns sources list
+      copy:
+        dest: /etc/apt/sources.list.d/pdns-auth.list
+        content: |
+          deb [signed-by=/etc/apt/keyrings/auth-50-pub.gpg] http://repo.powerdns.com/debian trixie-auth-50 main
+
+    - name: update apt cache # this fails with mitogen, runs without mitogen
+      apt:
+        update-cache: yes
