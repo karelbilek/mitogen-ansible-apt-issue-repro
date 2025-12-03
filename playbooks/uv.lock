@@ -217,7 +217,7 @@ dependencies = [
 requires-dist = [
     { name = "ansible-core", specifier = "==2.20" },
     { name = "ansible-runner", specifier = "==2.4" },
-    { name = "mitogen", specifier = ">=0.3.22" },
+    { name = "mitogen", specifier = ">=0.3.35" },
 ]
 
 [[package]]

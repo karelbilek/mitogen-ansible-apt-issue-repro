@@ -6,5 +6,5 @@ requires-python = ">=3.14"
 dependencies = [
     "ansible-core==2.20",
     "ansible-runner==2.4",
-    "mitogen>=0.3.22",
+    "mitogen>=0.3.35",
 ]
