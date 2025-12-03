@@ -1,17 +1,17 @@
 Repro for mitogen apt issue
 ==
 
-1. install docker
+1. install podman
 2. in ./docker/ folder, run
 
 ```
-docker build -t my_ssh_image .
+podman build -t my_ssh_image .
 ```
 
 3. then run
 
 ```
-docker run -d -p 2222:22 my_ssh_image
+podman run -d -p 2222:22 my_ssh_image
 ```
 
 4. install uv
